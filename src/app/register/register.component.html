@@ -1,0 +1,24 @@
+<div class="register-container">
+  <form [formGroup]="RegisterForm">
+    <!-- Username input -->
+    <div class="form-group mb-4">
+      <label for="username">Username</label>
+      <input formControlName="username" type="text" id="username" class="form-control" />
+    </div>
+
+    <!-- Email input -->
+    <div class="form-group mb-4">
+      <label for="email">Email address</label>
+      <input formControlName="email" type="email" id="email" class="form-control" />
+    </div>
+
+    <!-- Password input -->
+    <div class="form-group mb-4">
+      <label for="password">Password</label>
+      <input formControlName="password" type="password" id="password" class="form-control" />
+    </div>
+
+    <!-- Submit button -->
+    <button (click)="Register()" type="button" class="btn btn-primary btn-block mb-4">Register</button>
+  </form>
+</div>

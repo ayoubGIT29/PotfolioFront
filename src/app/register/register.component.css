@@ -1,0 +1,12 @@
+.register-container {
+  max-width: 400px; /* Set the maximum width for the form, same as login page */
+  margin: 50px auto; /* Center the form horizontally and add vertical margin */
+  padding: 20px; /* Add some padding around the form */
+  background-color: white; /* Optional: Add background color */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+}
+
+.form-control {
+  width: 100%; /* Ensure form inputs take up full width */
+}

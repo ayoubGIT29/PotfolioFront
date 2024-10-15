@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      margin-top: 20px;
+      background: #f5f5f5;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+      margin-bottom: 30px;
+      padding: 20px;
+      width: 100%;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+
+    .portfolio-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .user-section img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .project-label {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    .project-details {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<!-- Nav bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="color:white;">{{user.username}}'s Portfolio</a>
+</nav>
+
+<div class="container" id="main-container">
+  <div class="row">
+    <!-- User Information Section -->
+    <div class="col-lg-12">
+      <div class="portfolio-container">
+        <div class="user-section">
+          <img src="{{user?.imageUrl}}" alt="User Image">
+          <h2>{{user?.username}}</h2>
+          <p><strong>Email:</strong> {{user?.email}}</p>
+
+          <p><strong> {{user?.field}}</strong></p>
+
+          <p><strong>About me:</strong> {{user?.description}}</p>
+        </div>
+
+        <!-- Project Label -->
+        <div class="project-label">PROJECTS:</div>
+
+        <!-- Project Information Section -->
+        <div class="card project-details">
+          <h3>{{project?.title}}</h3>
+          <p><strong>Description:</strong> {{project?.description || 'No description available'}}</p>
+          <p><strong>Created At:</strong> {{project?.createdAt | date}}</p>
+          <p><strong>Last Modified:</strong> {{project?.modifiedAt | date}}</p>
+
+          <!-- Project Categories -->
+          <div *ngIf="project.categories && project.categories.length > 0">
+            <strong>Categories:</strong>
+            <span *ngFor="let category of project.categories; let i = index">
+                {{ category.name }}<span *ngIf="i !== project.categories.length - 1">, </span>
+              </span>
+          </div>
+
+
+          <!-- Project Technologies -->
+          <div>
+            <strong>Technologies:</strong>
+            <span *ngFor="let technology of project?.technologies; let isLast = last">
+    {{ technology.name }}<span *ngIf="!isLast">, </span>
+  </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+</body>
+</html>

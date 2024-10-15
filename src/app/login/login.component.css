@@ -1,0 +1,12 @@
+.login-container {
+  max-width: 400px; /* Set the maximum width for the form */
+  margin: 50px auto; /* Center the form horizontally and add some vertical margin */
+  padding: 20px; /* Add some padding around the form */
+  background-color: white; /* Optional: Add background color to make it stand out */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better design */
+}
+
+.form-control {
+  width: 100%; /* Make sure the form inputs take up the full width */
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Project Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      margin-top: 20px;
+      background: #f5f5f5;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+      margin-bottom: 30px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+      justify-content: flex-end;
+    }
+
+    .no-projects {
+      text-align: center;
+      color: #666;
+    }
+
+    .comments {
+      background-color: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .comments h6 {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+<!-- Nav bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" style="color:white;">Project Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto"></ul>
+    <form class="form-inline my-2 my-lg-0 ml-auto">
+      <input type="search" (ngModelChange)="searchProjects(key.value)" #key="ngModel" ngModel
+             name="key" id="searchProject" class="form-control mr-sm-2" placeholder="Search projects..." required>
+    </form>
+  </div>
+</nav>
+
+<div class="container" id="main-container">
+  <div class="row">
+    <div class="col-md-6 col-xl-3" *ngFor="let project of projects">
+      <div class="card m-b-30">
+        <div class="card-body">
+          <h5 class="card-title">{{project.title}}</h5>
+          <p class="card-text"><strong>Description:</strong> {{project.description || 'No description available'}}</p>
+          <p class="card-text"><strong>Created At:</strong> {{project.createdAt | date}}</p>
+          <p class="card-text"><strong>Last Modified:</strong> {{project.modifiedAt | date}}</p>
+          <p class="card-text"><strong>User:<p><a href="#"><img src="{{project.user?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a></p>
+          </strong> {{project.user.username}}</p>
+
+          <div *ngIf="project.categories && project.categories.length > 0">
+            <strong>Categories:</strong>
+            <span *ngFor="let category of project.categories; let i = index">
+                {{ category.name }}<span *ngIf="i !== project.categories.length - 1">, </span>
+              </span>
+          </div>
+
+          <div *ngIf="project.technologies && project.technologies.length > 0">
+            <strong>Technologies:</strong>
+            <span *ngFor="let technology of project.technologies; let i = index">
+                {{ technology.name }}<span *ngIf="i !== project.technologies.length - 1">, </span>
+              </span>
+          </div>
+
+          <div class="comments">
+            <h6>Comments:</h6>
+            <ul>
+              <li *ngFor="let comment of project.comments"><p><a href="#"><img src="{{comment.user?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a></p>
+                <strong>{{ comment.user.username }}</strong> : {{ comment.content }}</li>
+              <li *ngIf="project.comments.length === 0">No comments available.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="projects?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info no-projects" role="alert">
+      <h4 class="alert-heading">NO Projects!</h4>
+      <p>No Projects were found.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
+</body>
+</html>
